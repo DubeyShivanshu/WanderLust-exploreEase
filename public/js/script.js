@@ -1,6 +1,3 @@
-//51(A). Client side validation for 'new.ejs' form inputs using Bootstrap
-//made for client side validation of form inputs in 'new.ejs' file
-//Example starter JavaScript for disabling form submissions if there are invalid fields(copied from Bootstrap -> Forms -> Custom validation)
 (() => {
   'use strict'
 
