@@ -18,7 +18,7 @@ body{
 
 /*Navbar options*/
 .nav-link{
-    color: #222222 !important;     /*!important -> Make this color the highest priority, even if other styles (Bootstrap) try to override it*/
+    color: #222222 !important;     
 }
 
 /*compass logo*/
@@ -91,7 +91,6 @@ body{
     text-decoration: none;
 }
 
-/*Card Effect('card-img-overlay' such as hover etc)*/
 .card-img-overlay{
     opacity: 0;
 }
@@ -100,17 +99,14 @@ body{
     background-color: white;
 }
 
-/*for 'Add' btn in 'new.ejs' file*/
 .add-btn{
     border: none !important;
 }
 
-/*for 'Edit' btn in 'edit.ejs' file*/
 .edit-btn{
     border: none !important;
 }
 
-/*for styling img in 'show.ejs' file*/
 .show-img{
     height: 30vh;
 }
@@ -125,7 +121,6 @@ body{
     padding-right: 0;
 }
 
-/*styling for Map using 'Mapbox'(dispplaying map on 'show.ejs')*/
 #map {
     height: 350px;
     width: 100%;
