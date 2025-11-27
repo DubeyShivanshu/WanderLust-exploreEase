@@ -1,38 +1,27 @@
-<!--47(H). Update(Edit & Update Route) for edit the existing list by filling form & submit & redirect to main /listings page-->
-<!-- <!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>WanderLust</title>
-</head> -->
-
-<!--48(A). Create Boilerplate(making this 'edit.ejs' page on server(localhost), layout'll be same as main layout file 'boilerplate.ejs' means navbar,header,footer etc same on every page)-->
 <% layout("/layouts/boilerplate") %>
 
 <body>
 
-    <div class="row mt-3">      <!--this 'row' div to store this page in row form for outer styling(like width etc), mt-3 -> margin top to 3-->
+    <div class="row mt-3">     
       <div class="col-8 offset-2">
        <h3>Edit your Listing</h3>
        <br>
-       <form method="POST" action="/listings/<%= listing._id %>?_method=PUT" class="needs-validation" novalidate enctype="multipart/form-data">    <!--edit the specific list _id in /listings with method-override-> ?_method=PUT" & class="needs-validation" novalidate -> custom Bootstrap validation styles-->
-        <div class="mb-3">                                                       <!--"mb-3" -> each div's margin below of 3 from other-->
-            <label for="title" class="form-label">Title</label>                   <!--'form-label' : bootstrap class which Styles the <label> element in a form-->
-            <input type="text" class="form-control" name="listing[title]" value="<%= listing.title %>" required>      <!--'form-control' : bootstrap class which Styles form input, textarea, or select field-->
-          <div class="valid-feedback">Title looks good!</div>    <!--Bootstrap validation feedback success text msg(for title field)-->
+       <form method="POST" action="/listings/<%= listing._id %>?_method=PUT" class="needs-validation" novalidate enctype="multipart/form-data">    
+        <div class="mb-3">                                                       
+            <label for="title" class="form-label">Title</label>                  
+            <input type="text" class="form-control" name="listing[title]" value="<%= listing.title %>" required>     
+          <div class="valid-feedback">Title looks good!</div>    
         </div>
 
         <div class="mb-3">       
             <label for="description" class="form-label">Description</label>
             <textarea name="listing[description]" class="form-control" rows="3" cols="35"  required><%= listing.description %></textarea>
-          <div class="invalid-feedback">Please enter a short description</div>    <!--Bootstrap validation feedback failure text msg(for description field)-->
+          <div class="invalid-feedback">Please enter a short description</div>   
         </div>    
 
-        <!--59(B). Original image display on edit form-->
         <div class="mb-3">
             Original Listing Image <br>
-            <img src="<%= originalImageUrl %>" />     <!--rendering from 'controllers/listing.js' from 'EDIT' Route (org listing img display)-->
+            <img src="<%= originalImageUrl %>" />   
         </div>
 
         <!--Upload New img btn option-->
@@ -41,24 +30,24 @@
             <input type="file" class="form-control" name="listing[image]">  
         </div>
       
-        <div class="row">        <!--this 'row' class to make price & country field in same single line-->
-            <div class="mb-3 col-md-4">   <!--col-md-4 : taking 4 cols space out of 12 cols, until the screen is >= medium(in bootstrap by def. 12 cols)-->
+        <div class="row">       
+            <div class="mb-3 col-md-4">  
                 <label for="price" class="form-label">Price</label>
                 <input type="number" class="form-control" name="listing[price]" value="<%= listing.price %>" required>
-              <div class="invalid-feedback">Price should be valid</div>    <!--Bootstrap validation feedback failure text msg(for price field)-->
+              <div class="invalid-feedback">Price should be valid</div>   
             </div>
-            <div class="mb-3 col-md-8">   <!--col-md-8 : taking rest of 8 cols space out of 12 cols, until the screen is >= medium(in bootstrap by def. 12 cols)-->
+            <div class="mb-3 col-md-8">  
                 <label for="country" class="form-label">Country</label>
                 <label for="country" class="form-label">Country</label>
                 <input type="text" class="form-control" name="listing[country]" value="<%= listing.country %>" required>
-              <div class="invalid-feedback">Country name should be valid</div>    <!--Bootstrap validation feedback failure text msg(for country field)-->
+              <div class="invalid-feedback">Country name should be valid</div>   
             </div>
         </div>
         
         <div class="mb-3">
             <label for="location" class="form-label">Location</label>
             <input type="text" class="form-control" name="listing[location]" value="<%= listing.location %>" required>
-          <div class="invalid-feedback">Location should be valid</div>    <!--Bootstrap validation feedback failure text msg(for location field)-->
+          <div class="invalid-feedback">Location should be valid</div>    
         </div>
 
         <div class="mb-3">
@@ -76,7 +65,7 @@
           </select>
         </div>
 
-        <button class="btn btn-dark edit-btn mt-3">Edit</button>   <!--btn -> class name, btn-dark -> bootstrap btn functionality, edit-btn -> name for styling in style.css, mt-3 -> margin top to 3-->
+        <button class="btn btn-dark edit-btn mt-3">Edit</button>   
         <br><br>
        </form>
       </div>
