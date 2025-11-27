@@ -1,6 +1,3 @@
-<!--48(A). Creating Boilerplate (Main/Master Layout EJS page) (firstly install ejs-mate package-> 'npm i ejs-mate')-->
-<!--all your .ejs pages'll share same layout(the same header, footer & overall page structure) 
-    as defined in your main 'boilerplate.ejs' file(master layout)-->
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -15,39 +12,32 @@
     integrity="sha384-sRIl4kxILFvY47J16cr9ZwB07vP4J8+LH7qKQnuqkuIAvNWLzeN8tE5YBujZqJLB" 
     crossorigin="anonymous">
 
-    <!--Font awesome cdn link (for seeing the img/logo on / page)-->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/7.0.1/css/all.min.css"
     integrity="sha512-2SwdPD6INVrV/lHTZbO2nodKhrnDdJK9/kg2XD1r9uGqPo1cUbujc+IYdlYdEErWNu69gVcYgdxlmVmzTWnetw==" 
     crossorigin="anonymous" referrerpolicy="no-referrer" />
 
-    <!--Google Font style: Plus Jakarta Sans-->
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@300;400;500;600&display=swap" rel="stylesheet">
 
-    <!--for include MapLibre GL JS CSS from 'Maptiler.com'(that'll be display at 'show.ejs' page)-->
-    <!-- MapLibre GL JS CSS-->
     <link href="https://unpkg.com/maplibre-gl@4.1.1/dist/maplibre-gl.css" rel="stylesheet" />
     <script src="https://unpkg.com/maplibre-gl@4.1.1/dist/maplibre-gl.js"></script>
 </head>
 <body>
     <!--For including "Navbar"-->
-    <%- include("../includes/navbar.ejs") %>     <!--this line'll(navbar) be now shown at the top of every page on server(localhost)-->
+    <%- include("../includes/navbar.ejs") %>     
     
-    <!--55(I). For including flash 'success' Msg(used in 'flash middleware' in 'app.js') & display in '/views/includes/flash'-->
     <div class="container">   
-        <%- include("../includes/flash.ejs") %>  <!--including flash msg just before the "body" at each .ejs page bcoz wanna show flash msg at top of each page-->
-        <%- body %>    <!--Inserting layout same for every .ejs file body(copied from: npmjs.com->search 'ejs-mate'-> 'Usage' section)-->
+        <%- include("../includes/flash.ejs") %> 
+        <%- body %>    
     </div>
 
     <!--For including "Footer"-->
-    <%- include("../includes/footer.ejs") %>     <!--this line'll(footer) be now shown at the bottom of every page on server(localhost)-->
+    <%- include("../includes/footer.ejs") %>     
 
-    <!--Bootstrap 'JavaScript' styling include link-->
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/js/bootstrap.bundle.min.js" integrity="sha384-FKyoEForCGlyvwx9Hj09JcYn3nv7wiPVlz7YYwJrWVcXK/BmnVDxM+D2scQbITxI" crossorigin="anonymous"></script>
-    <script src="/js/script.js"></script>  <!--including custom javascript file on every page-->
+    <script src="/js/script.js"></script>  
 
-    <!--For include "public/css/rating.css"-->
     <link href="/css/rating.css" rel="stylesheet">
 </body>
 </html>
