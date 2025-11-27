@@ -1,0 +1,15 @@
+<!--51(F). Error Interface-->
+
+<!--48(A). Create Boilerplate(making this 'error.ejs' page on server(localhost), layout'll be same as main layout file 'boilerplate.ejs' means navbar,header,footer etc same on every page)-->
+<% layout("/layouts/boilerplate") %>
+<body>
+
+    <div class="row mt-3">
+        <div class="alert alert-danger col-6 offset-3" role="alert">
+            <h4 class="alert-heading">Error <%= statusCode %></h4>
+            <p><%= message %></p>
+        </div>
+    </div>
+    
+</body>
+</html>

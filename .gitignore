@@ -1,0 +1,6 @@
+#this file created to store imp. file/dir name inside which git will ignore while pushing
+.env
+node_modules/
+
+#for mac
+**/.DS_Store  

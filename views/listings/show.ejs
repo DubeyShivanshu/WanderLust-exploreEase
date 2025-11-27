@@ -1,0 +1,118 @@
+<!--48(A). Create Boilerplate(making this 'show.ejs' page on server(localhost), layout'll be same as main layout file 'boilerplate.ejs' means heading,header,footer etc same on every page)-->
+<% layout("/layouts/boilerplate") %>
+
+<!--for using Maptiler from 'public/js/map.js'-->
+<script>
+    const maptilerKey = "<%= process.env.MAPTILER_KEY %>";
+</script>
+
+<body>
+    
+    <div class="row mt-3">
+        <div class="col-8 offset-3">
+
+          <!--47(F). Read/Show Route for GET /listings/:id-->
+          <!--after clicking on specific place all listing link of Index page /listings this show route page opens showing all details-->
+          <h3> <%= listing.title %> </h3>   <!--showing listing (place) title at the top of the page-->
+          </div>   
+         
+            <div class="card col-6 offset-3 show-card listing-card">   <!--show-card: class name for styling the card of show page, listing-card: custom class for styling the card listing-->
+                <!--showing image of specific clicked listing(place)-->
+                <img src="<%= listing.image.url %>" class="show-img card-img-top" alt="Listing_image">    <!--show-img -> class name for styling, card-img-top ->images placed at the top of a card(showing img of specific clicked listing)-->
+                <div class="card-body">
+                    <p class="card-text">Owned by<i> <%= listing.owner.username %> </i></p>       <!--showing listing (place) username of owner, just below image-->
+
+                    <p class="card-text"> <%= listing.description %> </p>       <!--showing listing (place) description, just below image-->
+                    <p class="card-text"> &#8377; <%= listing.price .toLocaleString("en-IN") %> </p>   <!--&#8377; -> rupee symbol decimal code, .toLocaleString("en-IN") -> price no. are separated by ,comma(ex- 1,500)-->
+                    <p class="card-text"> <%= listing.location %> </p>       <!--showing listing (place) location, just below image-->
+                    <p class="card-text"><%= listing.country %> </p>        <!--showing listing (place) country, just below image-->
+                    <p class="card-text"><b>Category:</b> <%= listing.category 
+                                                                ? listing.category.charAt(0).toUpperCase() + listing.category.slice(1).replace(/([A-Z])/g, ' $1')
+                                                                : "Not specified" %></p>
+                </div>
+            </div>
+        </div>
+        <!--47(H). Edit(Edit & Update Route) for update/edit (using _id)the existing specific listing(place) by clicking on btn-->
+        <% if(currUser && listing.owner._id.equals(currUser._id)){ %>   <!--if curr. user exists && specific listing owner _id = curr. user _id, then only show Edit & Delete btns-->
+        <div class="btns">
+            <a href="/listings/<%= listing._id %>/edit" class="btn btn-dark offset-3 edit-btn">Edit</a> 
+
+        <!--47(I). Delete Route(to delete the specific listing using _id by click on delete btn)-->
+    
+            <form method="POST" action="/listings/<%= listing._id %>?_method=DELETE">    <!--method-override for DELETE action-> ?_method=DELETE-->
+                <button class="btn btn-dark offset-6">Delete</button>
+            </form> 
+        </div> <br>
+        <% } %>
+     <!--53(D). Adding Reviews Section in Show Page-->
+     <div class="col-8 offset-3">
+      <% if(currUser){ %> <hr>   <!--if curr. user exists, then only show rating, comment, submit review options-->
+        <h4>Leave a Review</h4>
+        <form action="/listings/<%=listing.id%>/reviews" method="POST" novalidate class="needs-validation">  <!--posting review for specific listing using its id, novalidate: to disable browser's default validation, class="needs-validation": bootstrap class for custom validation-->
+
+            <!--for 'rating'-->
+            <div class="mb-3 mt-3">
+               <label for="rating" class="form-label">Rating</label>    
+              <!--Pasted the 'starability-css' rating icon css code here(from github ['https://github.com/LunarLogic/starability/blob/master/README.md'])-->
+              <fieldset class="starability-slot">
+                <input type="radio" id="no-rate" class="input-no-rate" name="review[rating]" value="1" checked aria-label="No rating." />
+                <input type="radio" id="first-rate1" name="review[rating]" value="1" />
+                <label for="first-rate1" title="Terrible">1 star</label>
+                <input type="radio" id="first-rate2" name="review[rating]" value="2" />
+                <label for="first-rate2" title="Not good">2 stars</label>
+                <input type="radio" id="first-rate3" name="review[rating]" value="3" />
+                <label for="first-rate3" title="Average">3 stars</label>
+                <input type="radio" id="first-rate4" name="review[rating]" value="4" />
+                <label for="first-rate4" title="Very good">4 stars</label>
+                <input type="radio" id="first-rate5" name="review[rating]" value="5" />
+                <label for="first-rate5" title="Amazing">5 stars</label>
+              </fieldset>
+            </div>
+
+            <!--for 'comment'-->
+            <div class="mb-3 mt-3">
+                <label for="comment" class="form-label">Comments</label>
+                <textarea class="form-control"  id="comment" name="review[comment]" rows="4" cols="50" required></textarea>   <!--review[comment]: it helps to structure the req.body data in app.js as review: {comment: value} for easier access-->
+            
+              <div class="invalid-feedback">
+                Please add some comments for review
+              </div>
+            </div>
+            <!--for 'submit review btn'-->
+            <div>
+                <button type="submit" class="btn btn-outline-secondary mt-2">Submit Review</button>
+            </div><br>
+        </form>
+        <hr>
+      <% } %>
+        <!--Showing all reviews(Rating + comment) of each specific listing-->
+        <% if(listing.reviews.length > 0){ %>     <!--if there reviews exist(> 0) then only show 'All Reviews' part-->
+        <div class="row">   <!--row for all reviews cards-->
+         <p><b>All Reviews</b></p>
+         <% for(review of listing.reviews){ %>     <!--looping through all reviews array of specific listing(using .populate("reviews") in 'Show Route' in 'app.js')-->
+            <div class="card col-5 ms-3 mb-3">   <!--card for each review-->
+                <div class="card-body">
+                    <h5 class="card-title">@ <%= review.author.username %> </h5>    <!--adding username of the listing reviewer by using .populate 'author' in 'Show' route in 'listing.js'-->
+                    <p class="starability-result card-text" data-rating="<%= review.rating %>"></p>   <!--to show the rating stars inside rating card(copied from github)-->
+                    <p class="card-text"> <%= review.comment %></p>   <!--showing review comment-->
+                    <!-- <p class="card-text"> <%= review.rating %> stars</p>    showing review rating -->
+                </div>
+                <!--53(I). Deletion of review-->
+                <form class="mb-3" method="POST" action="/listings/<%=listing._id%>/reviews/<%=review._id%>?_method=DELETE">  <!--/listings/<%=listing._id%>/reviews/<%=review._id%> -> to delete specific review of specific listing using their _id, method-override for DELETE action-> ?_method=DELETE-->
+                    <button class="btn btn-sm btn-outline-danger mb-2 ms-2">Delete Review</button>                            
+                </form>
+            </div>
+         <% } %>
+        </div> 
+        <% } %>
+     </div>
+     <!--using 'Mapbox' code, to display map here-->
+        <div class="col-8 offset-3 mb-3">
+            <h3>Where you'll be</h3>
+            <div id="map"></div>
+        </div>
+    </div>
+
+    <!--using '/public/js/map.js' here so that maptiler works in map.js-->
+    <script src="/js/map.js"></script>
+</body>

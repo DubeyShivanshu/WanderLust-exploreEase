@@ -1,0 +1,93 @@
+<!--56(K). Creating Login page form by using routes '/routes/user.js'-->
+
+<!--48(A). Create Boilerplate(making this 'new.ejs' page on server(localhost), layout'll be same as main layout file 'boilerplate.ejs' means navbar,header,footer etc same on every page)-->
+<% layout("/layouts/boilerplate") %>
+
+<style>
+    .login-container {
+        margin-top: 60px;
+        display: flex;
+        justify-content: center;
+    }
+
+    .login-card {
+        width: 450px;
+        padding: 30px;
+        border-radius: 16px;
+        background: #ffffff;
+        box-shadow: 
+            0px 10px 25px rgba(0, 0, 0, 0.35), 
+            0px 4px 8px rgba(0, 0, 0, 0.15);
+        animation: fadeIn 0.5s ease-in-out;
+    }
+
+    .login-title {
+        text-align: center;
+        margin-bottom: 25px;
+        font-weight: 700;
+        font-size: 28px;
+        color: #2c3e50;
+    }
+
+    .form-control {
+        padding: 10px 14px;
+        border-radius: 8px;
+    }
+
+    .btn-login {
+        width: 100%;
+        padding: 12px;
+        border-radius: 10px;
+        font-size: 16px;
+        font-weight: 600;
+    }
+
+    .login-card label {
+        font-weight: 500;
+        margin-bottom: 5px;
+    }
+
+    /* Fade animation */
+    @keyframes fadeIn {
+        from { opacity: 0; transform: translateY(10px); }
+        to { opacity: 1; transform: translateY(0); }
+    }
+</style>
+
+<div class="login-container">
+    <div class="login-card">
+
+        <h2 class="login-title">Welcome Back</h2>
+
+        <form action="/login" method="POST" class="needs-validation" novalidate>
+
+            <!-- Username -->
+            <div class="mb-3">
+                <label for="username" class="form-label">Username</label>
+                <input 
+                    type="text" 
+                    class="form-control" 
+                    id="username" 
+                    name="username" 
+                    placeholder="Enter your username"
+                    required>
+            </div>
+
+            <!-- Password -->
+            <div class="mb-3">
+                <label for="password" class="form-label">Password</label>
+                <input 
+                    type="password" 
+                    class="form-control" 
+                    id="password" 
+                    name="password" 
+                    placeholder="Enter your password"
+                    required>
+            </div>
+
+            <!-- Login button -->
+            <button class="btn btn-success btn-login">Log In</button>
+        </form>
+    </div>
+</div>
+

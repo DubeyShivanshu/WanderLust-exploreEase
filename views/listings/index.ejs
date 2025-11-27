@@ -1,0 +1,162 @@
+<!--This is Frontend main page-->
+
+<!--48(A). Create Boilerplate(making this 'index.ejs' page on server(localhost), layout'll be same as main layout file 'boilerplate.ejs' means navbar,header,footer etc same on every page)-->
+<% layout("/layouts/boilerplate") %>
+
+<body>
+    <!--for styling of 'filters'-->
+    <style>
+      #filters{
+        display: flex;
+        flex-wrap: wrap;
+        align-items: center;
+      }
+
+      /* Hide filter icons on small screens */
+      @media (max-width: 992px) {
+        #filters .filter {
+          display: none !important;
+        }
+      }
+
+      .filter{
+        text-align: center;
+        text-decoration: none;
+        color: black;
+        margin-right: 2rem;
+        margin-top: 2rem;
+        opacity: 0.7;
+      }
+
+      .filter:hover{
+        opacity: 1;
+        cursor: pointer;
+      }
+
+      .filter p{
+        font-size: 0.8rem;
+      }
+
+      /*for funcioning of toggle btn from none to inline*/
+      .tax-info{
+        display: none;
+      }
+
+      /*for styling toggle bar*/
+      .tax-toggle{
+        border: 1px solid black;
+        border-radius: 1rem;
+        height: 3rem;
+        padding: 1rem;
+        margin-left: 3rem;
+        display: flex;
+        align-items: center;
+        border-color: grey;
+      }
+    </style>
+
+    <!--60(B). Add UI for Filters-->   
+    <div id="filters">
+
+      <a href="/listings" class="filter">
+        <div><i class="fa-solid fa-border-all"></i></div>
+        <p>All</p>
+      </a>
+
+      <a href="/listings/category/trending" class="filter">
+        <div><i class="fa-solid fa-fire"></i></div>
+        <p>Trending</p>
+      </a>
+
+      <a href="/listings/category/rooms" class="filter">
+        <div><i class="fa-solid fa-bed"></i></div>
+        <p>Rooms</p>
+      </a>
+
+      <a href="/listings/category/iconic cities" class="filter">
+        <div><i class="fa-solid fa-city"></i></div>
+        <p>Iconic Cities</p>
+      </a>
+
+      <a href="/listings/category/mountains" class="filter">
+        <div><i class="fa-solid fa-mountain"></i></div>
+        <p>Mountains</p>
+      </a>
+
+      <a href="/listings/category/castles" class="filter">
+        <div><i class="fa-brands fa-fort-awesome"></i></div>
+        <p>Castles</p>
+      </a>
+
+      <a href="/listings/category/amazing pools" class="filter">
+        <div><i class="fa-solid fa-person-swimming"></i></div>
+        <p>Amazing Pools</p>
+      </a>
+
+      <a href="/listings/category/camping" class="filter">
+        <div><i class="fa-solid fa-campground"></i></div>
+        <p>Camping</p>
+      </a>
+
+      <a href="/listings/category/beach" class="filter">
+        <div><i class="fa-solid fa-umbrella-beach"></i></div>
+        <p>Beach</p>
+      </a>
+
+      <a href="/listings/category/deserts" class="filter">
+        <div><i class="fa-solid fa-sun-plant-wilt"></i></div>
+        <p>Deserts</p>
+      </a>
+
+      <a href="/listings/category/arctic" class="filter">
+        <div><i class="fa-regular fa-snowflake"></i></div>
+        <p>Arctic</p>
+      </a>
+
+      <!--Adding Tax switch/toggle btn-->
+      <div class="tax-toggle">     
+        <div class="form-check-reverse form-switch">    <!--copied from bootstrap -> 'checks & radios' -> 'Switches'-->
+          <input class="form-check-input" type="checkbox" role="switch" id="switchCheckDefault">
+          <label class="form-check-label" for="switchCheckDefault">Display total after taxes</label>
+        </div>
+      </div>
+    </div>
+
+    <!--48(D). Styling Index(styling all the listings(All Listings page) using 'Bootstrap'->'Components'-> 'card' html code)-->
+    <div class="row row-cols-lg-3 row-cols-md-2 row-cols-sm-1 mt-3">    <!-- row-> class name(make this div to store imgs in row sequentially)
+                                                                , row-cols-lg-3,md-2,sm-1 -> on large,medium,small size screen showing only 3,2,1 img per row(bootstrap utility class)-->
+        <% for(let listing of allListings) { %>     <!--for loop to traverse to all the listings(places)-->
+         
+          <a href="/listings/<%= listing._id %>" class="listing-link">   <!--making all card imgs clickable so that by clicking reach to show page(details about place)-->
+         
+           <div class="card col listing-card">
+            <img src="<%= listing.image.url %>" class="card-img-top" alt="Listing_image" height="220rem">
+            <div class="card-img-overlay"></div>    <!--copied from bootstrap card option(for card effects)-->
+            <div class="card-body">
+              <p class="card-text"> 
+                <b> <%= listing.title %> </b><br>     <!--showing "title" in card-->
+                &#8377; <%= listing.price.toLocaleString("en-IN") %> / night   <!--showing "price" in card-->
+                <i class="tax-info"> &nbsp; +18% GST</i>
+              </p>
+            </div>
+           </div>
+          </a>
+        <% } %>
+    </div>
+    
+    <!--60(C, D). Making Tax Switch/Toggle btn functional-->
+    <script>
+      let taxSwitch = document.getElementById("switchCheckDefault");
+      taxSwitch.addEventListener("click", () => {
+        let taxInfo = document.getElementsByClassName("tax-info");
+        for(info of taxInfo){
+          if(info.style.display != "inline"){    //if not 'inline', then set to inline
+            info.style.display = "inline";       //making the display styling of taxInfo from none to 'inline'(by clicking on toggle btn the '+18% GST' displays)
+          } else {
+            info.style.display = "none";         //otherwise set to 'none'
+          }
+        }
+      });
+    </script>
+</body>
+</html>

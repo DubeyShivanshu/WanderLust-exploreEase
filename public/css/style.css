@@ -1,0 +1,134 @@
+body{
+    font-family: "Plus Jakarta Sans", sans-serif !important;    /*Google font style: Plus Jakarta Sans*/
+    display: flex;
+    flex-direction: column;
+    min-height: 100vh;
+}
+
+/*from 'boilerplate.ejs' file*/
+.container{
+    flex: 1;
+}
+
+/*Navbar*/
+.navbar{
+    height: 5rem;
+    background-color: white;
+}
+
+/*Navbar options*/
+.nav-link{
+    color: #222222 !important;     /*!important -> Make this color the highest priority, even if other styles (Bootstrap) try to override it*/
+}
+
+/*compass logo*/
+.fa-compass{
+    color: #fe424d;
+    font-size: 2rem;
+}
+
+/*Footer options*/
+.footer-info{
+    height: 8rem;
+    background-color: #ebebeb;
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    justify-content: space-evenly;
+    text-align: center;
+}
+
+.footer-info-links a{
+    text-decoration: none;
+    color: #222222;
+}
+
+.footer-info-links a:hover{
+    text-decoration: underline;      
+}
+
+/*for full width space for links, socials & brand*/
+.footer-info-links,
+.footer-info-socials, 
+.footer-info-brand {
+    width: 100%;            
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.footer-info-socials i{
+    margin-right: 1rem;
+    font-size: 1.2rem;
+}
+
+.footer-info-socials i:hover{
+    opacity: 0.2;
+    background-color: azure;
+}
+
+/*listings cards*/
+.listing-card{
+    border: none !important;
+    margin-bottom: 2rem;
+}
+
+.card-img-top{
+    border-radius: 1rem !important;
+    width: 100% !important;
+    object-fit: cover !important;
+}
+
+.card-body{        /*text inside card*/
+    padding: 0;
+}
+
+.card-text{
+    font-weight: 400 !important;     /*title,price in card*/
+}
+
+.listing-link{
+    text-decoration: none;
+}
+
+/*Card Effect('card-img-overlay' such as hover etc)*/
+.card-img-overlay{
+    opacity: 0;
+}
+.card-img-overlay:hover{
+    opacity: 0.2;
+    background-color: white;
+}
+
+/*for 'Add' btn in 'new.ejs' file*/
+.add-btn{
+    border: none !important;
+}
+
+/*for 'Edit' btn in 'edit.ejs' file*/
+.edit-btn{
+    border: none !important;
+}
+
+/*for styling img in 'show.ejs' file*/
+.show-img{
+    height: 30vh;
+}
+
+/*Edit & Delete btns in show.ejs file*/
+.btns{
+    display: flex;
+}
+
+.show-card{
+    padding-left: 0;
+    padding-right: 0;
+}
+
+/*styling for Map using 'Mapbox'(dispplaying map on 'show.ejs')*/
+#map {
+    height: 350px;
+    width: 100%;
+    border: 0.5px black solid;
+    border-radius: 5px;
+}
