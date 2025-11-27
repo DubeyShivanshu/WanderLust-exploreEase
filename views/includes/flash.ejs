@@ -1,11 +1,9 @@
-<!--55(I). For displaying flash "success" message-->
 <body>
-    <!--55(J). If there is a success variable && it contains at least one success message, then only "success" alert'll display at top of page-->
+   
     <% if(success && success.length){ %>
-        <div class="alert alert-success alert-dismissible fade show col-6 offset-3" role="alert">   <!--show success alert, then make it fade & atlast invisible(dismissible)-->
-            <%= success %>     <!--comes from 'connect-flash middleware' inside 'app.js'-->
+        <div class="alert alert-success alert-dismissible fade show col-6 offset-3" role="alert">   
+            <%= success %>    
             
-            <!--In success alert, cross sign btn to remove the alert displaying-->
             <button 
                 type="button" 
                 class="btn-close" 
@@ -15,12 +13,10 @@
         </div>
     <% } %>
 
-    <!--55(K). If there is a error variable && it contains at least one error message, then only "error" alert'll display at top of page-->
     <% if(error && error.length){ %>
-        <div class="alert alert-danger alert-dismissible fade show col-6 offset-3" role="alert">   <!--show danger alert, then make it fade & atlast invisible(dismissible)-->
-            <%= error %>     <!--comes from 'connect-flash middleware' inside 'app.js'-->
+        <div class="alert alert-danger alert-dismissible fade show col-6 offset-3" role="alert">   
+            <%= error %>    
             
-            <!--In error alert, cross sign btn to remove the alert displaying-->
             <button 
                 type="button" 
                 class="btn-close" 
@@ -30,6 +26,5 @@
         </div>
     <% } %>
 
-    <!--NOTE: All the functionalities of styling're taken from Bootstrap-->
 </body>
 </html>
