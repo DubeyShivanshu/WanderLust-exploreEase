@@ -1,6 +1,4 @@
-//47(C, D). Sample data for DB(copied from github)
 //inserting many listing schema docs in var sampleListings
-
 const sampleListings = [
   {
     title: "Modern Loft in Downtown",
