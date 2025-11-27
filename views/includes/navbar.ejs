@@ -1,6 +1,3 @@
-<!--48(B). Navbar-->
-<!--here, we'll copy-paste the code for website's navbar form 'Bootstrap'-> 'navbar' option-->
-
 <style>
   /*search btn*/
   .search-btn{
@@ -29,7 +26,7 @@
 
 <nav class="navbar navbar-expand-md bg-body-light border-bottom sticky-top">
   <div class="container-fluid">
-    <a class="navbar-brand" href="/listings"><i class="fa-solid fa-compass-drafting"></i></a>     <!--(copy font awesome cdn link in boilerplate.ejs inside <head>)this icon taken from 'Font awesome'-> search 'compass'-->
+    <a class="navbar-brand" href="/listings"><i class="fa-solid fa-compass-drafting"></i></a>    
     <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNavAltMarkup">
       <span class="navbar-toggler-icon"></span>
     </button>
@@ -54,16 +51,14 @@
         </button>
       </form>
 
-      <!--57(C). Add styling on 'SignUp, Login, Logout' routes (from 'user.js') at navbar-->
-      <div class="navbar-nav ms-auto">    <!--'ms-auto'-> margin start, to move these 3 at right corner-->
+      <div class="navbar-nav ms-auto">   
         <a class="nav-link" href="/listings/new">Airbnb your home</a>
-        <!--if user login not exist(not logged in), then show signup, login option on navbar-->
-        <% if(!currUser){ %>      <!--'currUser' is defined in 'res.locals.currUser = req.user;' in app.js, to use currUser here-->
+       
+        <% if(!currUser){ %>     
         <a class="nav-link" href="/signup"><b>Sign Up</b></a>
         <a class="nav-link" href="/login"><b>Log In</b></a>
         <% } %>
 
-        <!--otherwise, if login exists(already logged in), then only show Logout option in navbar-->
         <% if(currUser){ %>
         <a class="nav-link" href="/logout"><b>Log Out</b></a>
         <% } %>
