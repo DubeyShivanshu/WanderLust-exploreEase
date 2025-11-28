@@ -34,13 +34,22 @@ app.use(express.static(path.join(__dirname, "public")));
 
 const dbUrl = process.env.ATLASDB_URL;
 
-main().then(() => {
-    console.log("Connected to DB!");
-}).catch(err => {console.log(err)});
+async function main() {
+    try {
+        console.log("DB URL is:", process.env.ATLASDB_URL);
+        
+        await mongoose.connect(dbUrl, {
+            useNewUrlParser: true,
+            useUnifiedTopology: true,
+            ssl: true,              // force TLS/SSL connection
+        });
+        console.log("Connected to DB!");
+    } catch (err) {
+        console.error("DB connection error:", err);
+    }
+}
 
-async function main(){
-    await mongoose.connect(dbUrl);  
-};
+main();
 
 const store = MongoStore.create({
     mongoUrl: dbUrl,            
